@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>06 · "Aperte o play." + cabeçalho do canal + Inscrever-se</title></head>
+<body>
+<template>
+  <link rel="stylesheet" href="assets/yt.css">
+  <style>
+    #root, #root * { box-sizing: border-box; }
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--fonte-ui); -webkit-font-smoothing: antialiased; }
+    .f06-soco { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 960px 520px; }
+    .f06-frase { position: absolute; left: 0; top: 440px; width: 1920px; text-align: center; white-space: nowrap;
+      font: 800 156px/1 var(--fonte-display); letter-spacing: -.015em; color: var(--esc-txt); }
+    .f06-play { position: relative; display: inline-block; }
+    .f06-trilho { position: absolute; left: 4px; right: 4px; bottom: -34px; height: 14px; background: var(--yt-progresso); transform-origin: 0 50%; }
+    .f06-dot { position: absolute; right: -22px; bottom: -48px; width: 44px; height: 44px; border-radius: 50%; background: var(--yt-red); }
+    .f06-risco { position: absolute; left: 0; top: 628px; width: 1920px; height: 14px; background: var(--yt-red); transform-origin: 960px 50%; opacity: 0; }
+    /* cabeçalho do canal (modo escuro) */
+    .f06-canal { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .f06-avatar { position: absolute; left: 404px; top: 420px; width: 220px; height: 220px; border-radius: 50%; object-fit: cover; }
+    .f06-nome { position: absolute; left: 672px; top: 422px; font: 700 76px/1 var(--fonte-display); color: var(--esc-txt); white-space: nowrap; letter-spacing: -.008em; }
+    .f06-meta { position: absolute; left: 674px; top: 524px; font: 400 32px/1 var(--fonte-ui); color: var(--esc-txt2); white-space: nowrap; }
+    .f06-meta b { font-weight: 500; color: var(--esc-txt); }
+    .f06-botoes { position: absolute; left: 672px; top: 582px; height: 84px; }
+    .f06-btn { position: absolute; left: 0; top: 0; overflow: hidden; }
+    .f06-ripple { position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%;
+      background: rgba(15,15,15,.28); transform: scale(0); opacity: 0; }
+    .f06-inscrito { opacity: 0; }
+    .f06-sino { transform-origin: 50% 8%; }
+    /* assinatura de divulgação de canal (brand.youtube/promoting-your-channel): ícone oficial + "/@handle" */
+    .f06-assina { position: absolute; left: 0; top: 820px; width: 1920px; height: 104px; display: flex; align-items: center;
+      justify-content: center; gap: 30px; }
+    .f06-icone { height: 100px; width: auto; display: block; }
+    .f06-handle { font: 500 60px/1 var(--fonte-ui); color: var(--esc-txt); letter-spacing: -.005em; white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="f06-aperte" data-width="1920" data-height="1080">
+    <div class="f06-risco" id="f06-risco"></div>
+    <div class="f06-soco" id="f06-soco">
+      <div class="f06-frase">Aperte o <span class="f06-play">play.<span class="f06-trilho" id="f06-trilho"></span><span class="f06-dot" id="f06-dot"></span></span></div>
+    </div>
+    <div class="f06-canal" id="f06-canal">
+      <img class="f06-avatar" id="f06-avatar" src="assets/avatar.jpg" alt="">
+      <div class="f06-nome" id="f06-nome">Felipe Borges - Fala IA!</div>
+      <div class="f06-meta" id="f06-meta"><b>@FelipeBorgesFalaIA</b> • 16,3 mil inscritos • 53 vídeos</div>
+      <div class="f06-botoes" id="f06-botoes">
+        <div class="yt-inscrever esc f06-btn" id="f06-inscrever">Inscrever-se<span class="f06-ripple" id="f06-ripple"></span></div>
+        <div class="yt-inscrever yt-inscrito esc f06-btn f06-inscrito" id="f06-inscrito">
+          <svg class="f06-sino" id="f06-sino" width="44" height="44" viewBox="0 0 24 24"><path fill="#F1F1F1" d="M10 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm10-2.65V19H4v-1.65l2-1.88v-5.15C6 7.4 7.56 5.1 10 4.34v-.36c0-1.42 1.49-2.5 2.99-1.76.65.32 1.01 1.03 1.01 1.76v.39c2.44.75 4 3.06 4 5.98v5.15l2 1.85z"/></svg>
+          Inscrito
+          <svg width="36" height="36" viewBox="0 0 24 24"><path fill="#F1F1F1" d="m18 9.28-6.35 6.35-6.37-6.35.72-.71 5.64 5.65 5.65-5.65z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="f06-assina" id="f06-assina">
+      <img class="f06-icone" src="assets/marca/yt-icon-red.svg" alt="YouTube">
+      <div class="f06-handle">/@FelipeBorgesFalaIA</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var FPS = 30, q = 1 / FPS, D = 3.0;   /* host: global 12,00 → 15,00 */
+      var tl = gsap.timeline({ paused: true });
+
+      /* repouso */
+      gsap.set("#f06-soco", { scale: 1.45 });
+      gsap.set("#f06-trilho", { scaleX: 1 });
+      gsap.set(["#f06-avatar"], { scale: .6, opacity: 0 });
+      gsap.set(["#f06-nome", "#f06-meta", "#f06-botoes"], { x: 60, opacity: 0 });
+      gsap.set("#f06-assina", { y: 26, opacity: 0 });
+
+      /* 12,00 · SOCO: a frase entra a ×1,45 com o risco vermelho que se recolhe até virar a barra cheia */
+      tl.fromTo("#f06-risco", { opacity: 1, scaleX: 1 }, { scaleX: .12, opacity: 0, duration: 6 * q, ease: "power3.in" }, 0);
+      tl.to("#f06-soco", { scale: 1, duration: 14 * q, ease: "expo.out" }, q);
+
+      /* 12,60 · a frase sobe e o cabeçalho do canal se monta em cascata */
+      tl.to("#f06-soco", { y: -330, scale: .62, duration: 13 * q, ease: "power3.inOut" }, 0.60);
+      tl.to("#f06-avatar", { scale: 1, opacity: 1, duration: 10 * q, ease: "expo.out" }, 0.80);
+      tl.to("#f06-nome", { x: 0, opacity: 1, duration: 10 * q, ease: "expo.out" }, 0.80 + 2 * q);
+      tl.to("#f06-meta", { x: 0, opacity: 1, duration: 10 * q, ease: "expo.out" }, 0.80 + 4 * q);
+      tl.to("#f06-botoes", { x: 0, opacity: 1, duration: 10 * q, ease: "expo.out" }, 0.80 + 6 * q);
+
+      /* 13,30 · clique: aperta, ondula, vira "Inscrito" e o sino toca */
+      tl.to("#f06-inscrever", { scale: .94, duration: 2 * q, ease: "power2.out" }, 1.30);
+      tl.fromTo("#f06-ripple", { scale: 0, opacity: .9 }, { scale: 4, opacity: 0, duration: 10 * q, ease: "power2.out" }, 1.30);
+      tl.set("#f06-inscrever", { opacity: 0 }, 1.3667);
+      tl.set("#f06-inscrito", { opacity: 1 }, 1.3667);
+      tl.fromTo("#f06-inscrito", { scale: .94 }, { scale: 1, duration: 6 * q, ease: "power2.out" }, 1.3667);
+      [[18, 3], [-15, 3], [11, 3], [-7, 3], [3, 3], [0, 3]].forEach(function (k, i) {
+        tl.to("#f06-sino", { rotation: k[0], duration: k[1] * q, ease: "sine.inOut" }, 1.40 + i * 3 * q);
+      });
+
+      /* 13,60 · a assinatura (ícone + /@handle) entra por deslocamento + fade: o filme fecha */
+      tl.to("#f06-assina", { y: 0, opacity: 1, duration: 9 * q, ease: "power3.out" }, 1.60);
+      /* deriva mínima na segura final */
+      tl.to("#f06-canal", { scale: 1.012, transformOrigin: "960px 590px", duration: 1.1, ease: "none" }, 1.90);
+
+      tl.to({}, { duration: D }, 0);
+      window.__timelines["f06-aperte"] = tl;
+    })();
+  </script>
+</template>
+</body></html>

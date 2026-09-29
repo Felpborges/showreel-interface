@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>04 · Em alta — a grade do canal reordena e o nº 1 soca</title></head>
+<body>
+<template>
+  <link rel="stylesheet" href="assets/yt.css">
+  <style>
+    #root, #root * { box-sizing: border-box; }
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--fonte-ui); -webkit-font-smoothing: antialiased; }
+    .f04-pagina { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    .f04-chips { position: absolute; left: 114px; top: 86px; display: flex; gap: 14px; }
+    .f04-chipbox { position: relative; }
+    .f04-chip { height: 52px; padding: 0 21px; border-radius: 12px; font-size: 23px; }
+    .f04-chipbox .sel { position: absolute; left: 0; top: 0; opacity: 0; }
+    .f04-slot { position: absolute; width: 540px; height: 450px; overflow: hidden; }
+    .f04-card { position: absolute; left: 0; top: 0; width: 540px; }
+    .f04-th { position: relative; width: 540px; height: 304px; border-radius: 16px; overflow: hidden; background: #F2F2F2; }
+    .f04-th img, .f04-th video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .f04-tit { margin-top: 18px; }
+    .f04-meta svg { flex: none; }
+    .f04-hero { position: absolute; left: 114px; top: 170px; width: 540px; height: 304px; border-radius: 16px; overflow: hidden;
+      transform-origin: 50% 50%; opacity: 0; box-shadow: 0 30px 70px rgba(0,0,0,.25); }
+    .f04-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .f04-cont { position: absolute; left: 0; top: 790px; width: 1920px; display: flex; justify-content: center; align-items: center;
+      gap: 26px; opacity: 0; }
+    .f04-num { display: flex; font: 800 104px/1 var(--fonte-display); color: var(--clr-txt); letter-spacing: -.01em; }
+    .f04-col { display: block; height: 104px; overflow: hidden; }
+    .f04-strip { display: block; }
+    .f04-strip i { display: block; height: 104px; font-style: normal; }
+    .f04-lab { font: 500 60px/1 var(--fonte-display); color: var(--clr-txt2); margin-top: 18px; }
+  </style>
+  <div id="root" data-composition-id="f04-em-alta" data-width="1920" data-height="1080">
+    <div class="f04-pagina" id="f04-pagina" data-layout-allow-overflow>
+      <div class="f04-chips">
+        <div class="f04-chipbox" id="f04-cb0"><div class="yt-chip clr sel f04-chip" style="position:relative;opacity:1">Mais recentes</div></div>
+        <div class="f04-chipbox" id="f04-cb1"><div class="yt-chip clr f04-chip">Em alta</div><div class="yt-chip clr sel f04-chip" data-layout-allow-overlap id="f04-s1">Em alta</div></div>
+        <div class="f04-chipbox" id="f04-cb2"><div class="yt-chip clr f04-chip">Mais antigos</div></div>
+      </div>
+      <!-- base neutra do chip 0 para quando ele deixa de estar selecionado -->
+      <div id="f04-s0-off" data-layout-allow-overlap class="yt-chip clr f04-chip" style="position:absolute;left:114px;top:86px;opacity:0">Mais recentes</div>
+
+      <!-- SLOT 0: começa com o vídeo (continua o f03) e rola para o nº 1 -->
+      <div class="f04-slot" style="left:114px;top:170px">
+        <div class="f04-card" id="f04-r0" data-layout-allow-overflow>
+          <div class="f04-th" id="f04-r0-th">
+            <video id="f04-v" src="assets/clipes/c5-dicas-ok.mp4" data-start="0" data-duration="1.5" data-media-start="1.05" muted playsinline></video>
+            <span class="yt-visto" id="f04-visto" style="width:14%;opacity:0"></span>
+          </div>
+          <div class="yt-titulo-card f04-tit">12 DICAS PARA DEIXAR O OPUS 5.5 MELHOR E MAIS BARATO</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>7,7 mil&nbsp;&nbsp;há 18 h</div>
+        </div>
+        <div class="f04-card" id="f04-t0" data-layout-allow-overflow>
+          <div class="f04-th" id="f04-t0-th"><img src="assets/thumbs/01-XTtTBqECLPs.jpg" alt=""><span class="yt-dur">20:36</span></div>
+          <div class="yt-titulo-card f04-tit">Claude Design Agora Faz Motion Graphics… e Ficou Absurdo</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>162 mil&nbsp;&nbsp;há 1 mês</div>
+        </div>
+      </div>
+      <div class="f04-slot" style="left:690px;top:170px">
+        <div class="f04-card" id="f04-r1" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/26-JJNU6ShmA7I.jpg" alt=""><span class="yt-dur">16:18</span></div>
+          <div class="yt-titulo-card f04-tit">OPUS 5.5 ELEVOU os MOTION GRAPHICS para um nível INSANO</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>10 mil&nbsp;&nbsp;há 4 dias</div>
+        </div>
+        <div class="f04-card" id="f04-t1" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/02-sLQPyJKSzoA.jpg" alt=""><span class="yt-dur">23:58</span></div>
+          <div class="yt-titulo-card f04-tit">Domine Claude Code Skills em 1 Vídeo (Muito Fácil)</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>59 mil&nbsp;&nbsp;há 4 meses</div>
+        </div>
+      </div>
+      <div class="f04-slot" style="left:1266px;top:170px">
+        <div class="f04-card" id="f04-r2" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/39-Z2Ifhlxfgto.jpg" alt=""><span class="yt-dur">15:09</span></div>
+          <div class="yt-titulo-card f04-tit">Crie Sites PERFEITOS com Fable 5.1 e GPT6-Astra</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>3,6 mil&nbsp;&nbsp;há 1 semana</div>
+        </div>
+        <div class="f04-card" id="f04-t2" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/03-TGePM27qeTo.jpg" alt=""><span class="yt-dur">21:29</span></div>
+          <div class="yt-titulo-card f04-tit">Claude Design FINALMENTE chegou no Claude Code (e é melhor)</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>59 mil&nbsp;&nbsp;há 1 mês</div>
+        </div>
+      </div>
+      <div class="f04-slot" style="left:114px;top:632px">
+        <div class="f04-card" id="f04-r3" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/15-aVh0QMKKK6M.jpg" alt=""><span class="yt-dur">17:53</span></div>
+          <div class="yt-titulo-card f04-tit">OpenClaw 2.0 chegou… e é incrível</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>24 mil&nbsp;&nbsp;há 1 semana</div>
+        </div>
+        <div class="f04-card" id="f04-t3" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/04-B_er667kN3w.jpg" alt=""><span class="yt-dur">21:59</span></div>
+          <div class="yt-titulo-card f04-tit">Antigravity com Claude Code É ABSURDO! Crie um CRM Completo (Muito Fácil)</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>54 mil&nbsp;&nbsp;há 5 meses</div>
+        </div>
+      </div>
+      <div class="f04-slot" style="left:690px;top:632px">
+        <div class="f04-card" id="f04-r4" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/07-DRBhfcJjnsw.jpg" alt=""><span class="yt-dur">19:32</span></div>
+          <div class="yt-titulo-card f04-tit">GPT6-ASTRA Agora faz Motion Graphics... e Ficou Incrível!</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>36 mil&nbsp;&nbsp;há 2 semanas</div>
+        </div>
+        <div class="f04-card" id="f04-t4" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/05-F7H5uY13mQM.jpg" alt=""><span class="yt-dur">16:29</span></div>
+          <div class="yt-titulo-card f04-tit">O GPT-6 ASTRA Acabou de QUEBRAR a Internet (AGI Chegou?)</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>40 mil&nbsp;&nbsp;há 3 semanas</div>
+        </div>
+      </div>
+      <div class="f04-slot" style="left:1266px;top:632px">
+        <div class="f04-card" id="f04-r5" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/10-GTpAtotcAvQ.jpg" alt=""><span class="yt-dur">22:24</span></div>
+          <div class="yt-titulo-card f04-tit">Testei o GPT 6 Astra vs Fable 5.1 em 6 CASOS REAIS!</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>29 mil&nbsp;&nbsp;há 2 semanas</div>
+        </div>
+        <div class="f04-card" id="f04-t5" data-layout-allow-overflow>
+          <div class="f04-th"><img src="assets/thumbs/06-77rBw7G3xGA.jpg" alt=""><span class="yt-dur">20:46</span></div>
+          <div class="yt-titulo-card f04-tit">Antigravity /goal Foi Lançado, e é Perfeito!</div>
+          <div class="yt-meta-card f04-meta"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#606060" stroke-width="2" stroke-linejoin="round"/></svg>37 mil&nbsp;&nbsp;há 4 meses</div>
+        </div>
+      </div>
+
+      <!-- o nº 1 que soca para a frente (troca invisível com o card do slot 0) -->
+      <div class="f04-hero" id="f04-hero"><img src="assets/thumbs/01-XTtTBqECLPs.jpg" alt=""><span class="yt-dur">20:36</span></div>
+      <div class="f04-cont" id="f04-cont">
+        <svg width="62" height="70" viewBox="0 0 18 20"><path d="M2 2 L16 10 L2 18 Z" fill="none" stroke="#0F0F0F" stroke-width="2.2" stroke-linejoin="round"/></svg>
+        <div class="f04-num" data-layout-allow-overflow data-layout-allow-occlusion>
+          <span class="f04-col"><span class="f04-strip" id="f04-d0"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span>
+          <span class="f04-col"><span class="f04-strip" id="f04-d1"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span>
+          <span class="f04-col"><span class="f04-strip" id="f04-d2"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span>
+          <span>.</span>
+          <span class="f04-col"><span class="f04-strip" id="f04-d3"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span>
+          <span class="f04-col"><span class="f04-strip" id="f04-d4"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span>
+          <span class="f04-col"><span class="f04-strip" id="f04-d5"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span>
+        </div>
+        <div class="f04-lab">visualizações</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var FPS = 30, q = 1 / FPS, D = 4.0;   /* host: global 6,00 → 10,00 ; local = global − 6 */
+      var tl = gsap.timeline({ paused: true });
+      var S = 1920 / 540;
+
+      /* repouso: câmera colada no slot 0 (o vídeo ocupa a tela, igual ao último quadro do f03) */
+      gsap.set("#f04-pagina", { x: -114 * S, y: -170 * S, scale: S });
+      gsap.set("#f04-r0-th", { clipPath: "inset(0px round 0px)", borderRadius: 0 });
+      ["#f04-t0", "#f04-t1", "#f04-t2", "#f04-t3", "#f04-t4", "#f04-t5"].forEach(function (c) { gsap.set(c, { y: 470 }); });
+
+      /* T4 · a tela cheia vira card e a câmera recua para a grade do canal */
+      tl.to("#f04-pagina", { x: 0, y: 0, scale: 1, duration: 19 * q, ease: "power3.inOut" }, 0);
+      tl.to("#f04-r0-th", { clipPath: "inset(0px round 16px)", duration: 19 * q, ease: "power3.inOut" }, 0);
+      tl.to("#f04-visto", { opacity: 1, duration: 4 * q }, 0.40);
+      /* deriva mínima na segura */
+      tl.to("#f04-pagina", { x: -10, y: -6, scale: 1.006, duration: 0.36, ease: "none" }, 0.64);
+
+      /* clique em "Em alta" (7,00 global) */
+      tl.set("#f04-s0-off", { opacity: 1 }, 1.0);
+      tl.set("#f04-s1", { opacity: 1 }, 1.0);
+      tl.to("#f04-cb1", { scale: .92, duration: 2 * q, ease: "power2.out" }, 1.0);
+      tl.to("#f04-cb1", { scale: 1, duration: 5 * q, ease: "power2.out" }, 1.0 + 2 * q);
+
+      /* caça-níquel na grade: cada slot rola do "recente" para o "em alta" (1 q de defasagem) */
+      for (var i = 0; i < 6; i++) {
+        var t0 = 1.0667 + i * q;
+        tl.to("#f04-r" + i, { y: -470, filter: "blur(6px)", duration: 9 * q, ease: "power3.inOut" }, t0);
+        tl.to("#f04-t" + i, { y: 0, duration: 9 * q, ease: "power3.inOut" }, t0);
+      }
+
+      /* 8,00 · o nº 1 soca para a frente; o resto recua */
+      tl.set("#f04-hero", { opacity: 1 }, 2.0);
+      tl.set("#f04-t0-th", { opacity: 0 }, 2.0);
+      tl.to("#f04-hero", { x: 576, y: 96, scale: 2.0, duration: 11 * q, ease: "expo.out" }, 2.0);
+      tl.to(".f04-slot, .f04-chips, #f04-s0-off", { opacity: .06, duration: 8 * q, ease: "power2.out" }, 2.0);
+
+      /* contador rola até 162.717 visualizações */
+      tl.fromTo("#f04-cont", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 8 * q, ease: "power3.out" }, 2.1);
+      var alvo = [1, 6, 2, 7, 1, 7], H = 104;
+      alvo.forEach(function (d, k) {
+        tl.fromTo("#f04-d" + k, { y: 0 }, { y: -(20 + d) * H, duration: 0.55 + k * 0.07, ease: "power3.out" }, 2.15);
+      });
+
+      /* T6 · chicote para a esquerda, corte duro em 10,00 */
+      tl.to("#f04-pagina", { x: -2700, scaleX: 1.08, filter: "blur(22px)", duration: 7 * q, ease: "power4.in" }, 3.7667);
+
+      tl.to({}, { duration: D }, 0);
+      window.__timelines["f04-em-alta"] = tl;
+    })();
+  </script>
+</template>
+</body></html>

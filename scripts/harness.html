@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- Harness de verificação de UM frame: http://localhost:8765/_harness.html?frame=07-resultados&t=1.2
+     Monta o <template> do frame em #root (1920x1080), carrega o GSAP e faz seek(t) na timeline registrada.
+     Fundo xadrez cinza/branco para enxergar transparência nos frames de câmera. -->
+<html lang="pt-BR"><head><meta charset="utf-8"><base href="/">
+<style>
+  html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#888}
+  body{background-image:linear-gradient(45deg,#777 25%,transparent 25%),linear-gradient(-45deg,#777 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#777 75%),linear-gradient(-45deg,transparent 75%,#777 75%);background-size:80px 80px;background-position:0 0,0 40px,40px -40px,-40px 0}
+  #stage{position:absolute;inset:0;width:1920px;height:1080px}
+  .clip{position:absolute;inset:0}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+</head><body><div id="stage"></div>
+<script>
+(async function(){
+  var q=new URLSearchParams(location.search);
+  var frame=q.get('frame'), t=parseFloat(q.get('t')||'0'); var bg=q.get('bg'); if(bg){document.body.style.background='#'+bg;}
+  window.__timelines = window.__timelines || {};
+  var html=await (await fetch('/compositions/frames/'+frame+'.html')).text();
+  var doc=new DOMParser().parseFromString(html,'text/html');
+  var tpl=doc.querySelector('template');
+  if(!tpl){ document.title='SEM TEMPLATE'; return; }
+  var frag=document.importNode(tpl.content,true);
+  // scripts clonados via importNode não executam: recriar
+  var scripts=[...frag.querySelectorAll('script')].map(s=>{var n=document.createElement('script');n.textContent=s.textContent;s.remove();return n;});
+  document.getElementById('stage').appendChild(frag);
+  await document.fonts.ready;
+  scripts.forEach(n=>document.body.appendChild(n));
+  var id=document.querySelector('#stage #root')?.getAttribute('data-composition-id');
+  var tl=window.__timelines[id];
+  document.title=(tl?'OK ':'SEM TIMELINE ')+id+' t='+t+' dur='+(tl?tl.duration().toFixed(2):'-');
+  if(tl){ tl.pause(0); tl.seek(t,false); }
+  var vids=document.querySelectorAll('#stage video');
+  vids.forEach(v=>{ var ms=parseFloat(v.getAttribute('data-media-start')||'0'); var st=parseFloat(v.getAttribute('data-start')||'0'); try{ v.pause(); v.currentTime=Math.max(0, ms + t - st); }catch(e){} });
+  var tag=document.createElement('div'); tag.textContent=document.title; tag.style.cssText='position:absolute;left:16px;bottom:12px;font:600 26px/1 monospace;color:#fff;background:rgba(0,0,0,.6);padding:8px 12px;border-radius:8px;z-index:99999';
+  document.body.appendChild(tag);
+})();
+</script></body></html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Não aperte o play — reel YouTube 15s</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0F0F0F; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      .clip { position: absolute; inset: 0; }
+      .scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+      /* os dois mundos = os dois modos da própria UI do YouTube */
+      .mundo-escuro { background: #0F0F0F; }
+      .mundo-claro { background: #FFFFFF; }
+      /* empilhamento explícito: nas emendas sobrepostas, quem sai fica por cima */
+      #bg1, #bg2, #bg3 { z-index: 0; }
+      #el-02, #el-03, #el-04, #el-05, #el-06 { z-index: 1; isolation: isolate; }
+      #el-01 { z-index: 2; isolation: isolate; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-fps="30" data-width="1920" data-height="1080">
+      <!-- mundos (fundo full-bleed em camada própria) -->
+      <div id="bg1" class="clip mundo-escuro" data-start="0" data-duration="4" data-track-index="0"></div>
+      <div id="bg2" class="clip mundo-claro" data-start="6" data-duration="4" data-track-index="0"></div>
+      <div id="bg3" class="clip mundo-escuro" data-start="10" data-duration="5" data-track-index="0"></div>
+
+      <!-- beats (sub-composições; janelas na grade de 120 BPM: 1 tempo = 0,5 s) -->
+      <div id="el-01" class="scene" data-composition-id="f01-busca" data-composition-src="compositions/frames/01-busca.html" data-start="0" data-duration="2.1" data-track-index="2" data-width="1920" data-height="1080"></div>
+      <div id="el-02" class="scene" data-composition-id="f02-porque" data-composition-src="compositions/frames/02-porque.html" data-start="1.9" data-duration="2.1" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-03" class="scene" data-composition-id="f03-player" data-composition-src="compositions/frames/03-player.html" data-start="4" data-duration="2" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-04" class="scene" data-composition-id="f04-em-alta" data-composition-src="compositions/frames/04-em-alta.html" data-start="6" data-duration="4" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-05" class="scene" data-composition-id="f05-so-mais-um" data-composition-src="compositions/frames/05-so-mais-um.html" data-start="10" data-duration="2" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-06" class="scene" data-composition-id="f06-aperte" data-composition-src="compositions/frames/06-aperte.html" data-start="12" data-duration="3" data-track-index="1" data-width="1920" data-height="1080"></div>
+
+      <!-- trilha: música (Sonilo, 120 BPM, drop em 4,00) + desenho de som, mixada em −14 LUFS -->
+      <audio id="trilha" src="assets/audio/trilha-final.wav" data-start="0" data-duration="15" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script>
+      (function () {
+        var tl = gsap.timeline({ paused: true });
+        tl.to({}, { duration: 15 }, 0);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

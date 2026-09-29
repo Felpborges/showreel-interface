@@ -1,0 +1,63 @@
+/* Sistema de design do reel — a UI do YouTube em escala de vídeo (1920×1080).
+   Tokens medidos na página real do canal (captura 29/09/2026) e nos arquivos oficiais da marca
+   (brand.youtube: vermelho #FF0033). Os componentes são os átomos nativos, ampliados ~2,4×. */
+
+@font-face { font-family: "Roboto"; src: url("fonts/Roboto-var.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: block; }
+/* YouTube Sans: fonte proprietária da marca (servida pelo Google). Usada só nos títulos e no nome do canal,
+   onde o próprio YouTube usa. Para uso comercial sem licença, troque --fonte-display por Roboto. */
+@font-face { font-family: "YouTube Sans"; src: url("fonts/YouTubeSans-var.woff2") format("woff2"); font-weight: 300 900; font-style: normal; font-display: block; }
+
+:root {
+  /* marca */
+  --yt-red: #FF0033;
+  --yt-magenta: #FF2791;
+  --yt-progresso: linear-gradient(90deg, #FF0033 80%, #FF2791);
+  /* modo escuro (mundo escuro) */
+  --esc-bg: #0F0F0F; --esc-txt: #F1F1F1; --esc-txt2: #AAAAAA; --esc-chip: #272727;
+  --esc-busca: #121212; --esc-borda: #303030; --esc-botao: #222222;
+  /* modo claro (mundo claro) */
+  --clr-bg: #FFFFFF; --clr-txt: #0F0F0F; --clr-txt2: #606060; --clr-chip: #F2F2F2; --clr-borda: #D3D3D3;
+  --fonte-ui: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --fonte-display: "YouTube Sans", "Roboto", Arial, sans-serif;
+}
+
+/* ---------- barra de busca (modo escuro), ~2,4× ---------- */
+.yt-busca { position: absolute; display: flex; align-items: center; height: 100px; }
+.yt-busca-campo { position: relative; height: 100px; background: var(--esc-busca); border: 2px solid var(--esc-borda);
+  border-right: none; border-radius: 50px 0 0 50px; display: flex; align-items: center; padding-left: 48px; }
+.yt-busca-botao { width: 156px; height: 100px; background: var(--esc-botao); border: 2px solid var(--esc-borda);
+  border-radius: 0 50px 50px 0; display: grid; place-items: center; }
+.yt-mic { width: 100px; height: 100px; border-radius: 50%; background: #272727; display: grid; place-items: center; margin-left: 26px; }
+.yt-busca-txt { font: 400 50px/1 var(--fonte-ui); color: var(--esc-txt); white-space: nowrap; letter-spacing: -.005em; }
+.yt-placeholder { color: #888888; }
+
+/* ---------- chips de filtro ---------- */
+.yt-chip { display: inline-flex; align-items: center; justify-content: center; height: 78px; padding: 0 32px;
+  border-radius: 20px; font: 500 34px/1 var(--fonte-ui); white-space: nowrap; letter-spacing: .005em; }
+.yt-chip.esc { background: var(--esc-chip); color: var(--esc-txt); }
+.yt-chip.esc.sel { background: var(--esc-txt); color: var(--esc-bg); }
+.yt-chip.clr { background: var(--clr-chip); color: var(--clr-txt); }
+.yt-chip.clr.sel { background: var(--clr-txt); color: #FFFFFF; }
+
+/* ---------- thumbnail com selo de duração ---------- */
+.yt-thumb { position: absolute; overflow: hidden; border-radius: 16px; background: #0F0F0F; }
+.yt-thumb img, .yt-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.yt-dur { position: absolute; right: 12px; bottom: 12px; padding: 4px 9px; border-radius: 7px;
+  background: rgba(0,0,0,.6); color: #fff; font: 500 22px/1.1 var(--fonte-ui); letter-spacing: .02em; }
+.yt-visto { position: absolute; left: 0; bottom: 0; height: 7px; background: var(--yt-progresso); }  /* "já assistido" */
+
+/* ---------- metadados de card (grade da aba Vídeos) ---------- */
+.yt-titulo-card { font: 500 25px/1.28 var(--fonte-ui); color: var(--clr-txt); display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden; }
+.yt-meta-card { font: 400 21px/1.3 var(--fonte-ui); color: var(--clr-txt2); display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+
+/* ---------- player ---------- */
+.yt-barra { position: absolute; height: 8px; background: rgba(255,255,255,.28); }
+.yt-barra-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--yt-progresso); transform-origin: 0 50%; }
+.yt-scrubber { position: absolute; width: 28px; height: 28px; border-radius: 50%; background: var(--yt-red); }
+
+/* ---------- botão Inscrever-se (modo escuro) ---------- */
+.yt-inscrever { display: inline-flex; align-items: center; justify-content: center; height: 84px; padding: 0 44px;
+  border-radius: 42px; font: 500 34px/1 var(--fonte-ui); white-space: nowrap; }
+.yt-inscrever.esc { background: var(--esc-txt); color: var(--esc-bg); }
+.yt-inscrito.esc { background: var(--esc-chip); color: var(--esc-txt); gap: 16px; }

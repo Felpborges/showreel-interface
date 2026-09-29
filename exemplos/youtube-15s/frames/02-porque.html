@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>02 · "Vou te mostrar por quê." + chips + baralho 3D</title></head>
+<body>
+<template>
+  <link rel="stylesheet" href="assets/yt.css">
+  <style>
+    #root, #root * { box-sizing: border-box; }
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--fonte-ui); -webkit-font-smoothing: antialiased; }
+    .f02-grupo { position: absolute; inset: 0; transform-origin: 960px 470px; }
+    .f02-titulo { position: absolute; left: 0; top: 318px; width: 1920px; text-align: center; white-space: nowrap;
+      font: 700 108px/1.1 var(--fonte-display); letter-spacing: -.012em; color: var(--esc-txt); transform-origin: 960px 380px; }
+    .f02-eco { opacity: 0; }
+    .f02-chips { position: absolute; left: 0; top: 522px; width: 1920px; display: flex; justify-content: center; gap: 28px; }
+    /* o chip é o título de capítulo: tem que ler de longe (1,35× o chip base) */
+    .f02-chips .yt-chip { height: 104px; padding: 0 44px; border-radius: 26px; font-size: 46px; }
+    .f02-chipbox { position: relative; }
+    .f02-chipbox .sel { position: absolute; left: 0; top: 0; opacity: 0; }
+    /* baralho 3D: perspectiva centrada no card da frente, que é 2D (ver T3) */
+    .f02-palco { position: absolute; inset: 0; perspective: 1500px; perspective-origin: 760px 540px; }
+    .f02-card { position: absolute; left: 540px; top: 304px; width: 840px; height: 472px; border-radius: 18px; overflow: hidden;
+      transform-style: preserve-3d; box-shadow: 0 30px 60px rgba(0,0,0,.45); background: #0F0F0F; }
+    .f02-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .f02-card .yt-dur { right: 14px; bottom: 14px; font-size: 24px; }
+    .f02-frente { position: absolute; left: 540px; top: 304px; width: 840px; height: 472px; transform-origin: 50% 50%; }
+    .f02-frente-in { position: absolute; inset: 0; overflow: hidden; }
+    .f02-frente-in img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .f02-frente-in .yt-dur { right: 14px; bottom: 14px; font-size: 24px; }
+  </style>
+  <div id="root" data-composition-id="f02-porque" data-width="1920" data-height="1080">
+    <!-- o baralho vem por trás do título -->
+    <div class="f02-palco" id="f02-palco">
+      <div class="f02-card" id="f02-c7"><img src="assets/thumbs/05-F7H5uY13mQM.jpg" alt=""><span class="yt-dur" data-layout-allow-overlap>16:29</span></div>
+      <div class="f02-card" id="f02-c6"><img src="assets/thumbs/08-7EDd1ND1cY4.jpg" alt=""><span class="yt-dur" data-layout-allow-overlap>18:33</span></div>
+      <div class="f02-card" id="f02-c5"><img src="assets/thumbs/10-GTpAtotcAvQ.jpg" alt=""><span class="yt-dur" data-layout-allow-overlap>22:24</span></div>
+      <div class="f02-card" id="f02-c4"><img src="assets/thumbs/07-DRBhfcJjnsw.jpg" alt=""><span class="yt-dur" data-layout-allow-overlap>19:32</span></div>
+      <div class="f02-card" id="f02-c3"><img src="assets/thumbs/15-aVh0QMKKK6M.jpg" alt=""><span class="yt-dur" data-layout-allow-overlap>17:53</span></div>
+      <div class="f02-card" id="f02-c2"><img src="assets/thumbs/39-Z2Ifhlxfgto.jpg" alt=""><span class="yt-dur" data-layout-allow-overlap>15:09</span></div>
+      <div class="f02-card" id="f02-c1"><img src="assets/thumbs/26-JJNU6ShmA7I.jpg" alt=""><span class="yt-dur" data-layout-allow-overlap>16:18</span></div>
+    </div>
+    <div class="f02-frente" id="f02-frente">
+      <div class="f02-frente-in" id="f02-frente-in"><img src="assets/thumbs/30-Cp1mQc-sX4U.jpg" alt=""><span class="yt-dur" id="f02-frente-dur">17:14</span></div>
+    </div>
+
+    <div class="f02-grupo" id="f02-grupo">
+      <div class="f02-titulo f02-eco" id="f02-eco3" aria-hidden="true" data-layout-allow-overlap>Vou te mostrar por quê.</div>
+      <div class="f02-titulo f02-eco" id="f02-eco2" aria-hidden="true" data-layout-allow-overlap>Vou te mostrar por quê.</div>
+      <div class="f02-titulo f02-eco" id="f02-eco1" aria-hidden="true" data-layout-allow-overlap>Vou te mostrar por quê.</div>
+      <div class="f02-titulo" id="f02-titulo">Vou te mostrar por quê.</div>
+      <div class="f02-chips" id="f02-chips">
+        <div class="f02-chipbox" id="f02-cb0"><div class="yt-chip esc">Mais recentes</div><div class="yt-chip esc sel" data-layout-allow-overlap id="f02-s0">Mais recentes</div></div>
+        <div class="f02-chipbox" id="f02-cb1"><div class="yt-chip esc">Em alta</div><div class="yt-chip esc sel" data-layout-allow-overlap id="f02-s1">Em alta</div></div>
+        <div class="f02-chipbox" id="f02-cb2"><div class="yt-chip esc">Mais antigos</div><div class="yt-chip esc sel" data-layout-allow-overlap id="f02-s2">Mais antigos</div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var FPS = 30, q = 1 / FPS, D = 2.1;          /* host: global 1,90 → 4,00 ; local = global − 1,90 */
+      var tl = gsap.timeline({ paused: true });
+      var G = function (t) { return +(t - 1.9).toFixed(4); };
+
+      /* repouso */
+      gsap.set("#f02-titulo", { scale: .55, opacity: 0 });
+      gsap.set(["#f02-cb0", "#f02-cb1", "#f02-cb2"], { y: 36, opacity: 0 });
+      var cards = ["#f02-c1", "#f02-c2", "#f02-c3", "#f02-c4", "#f02-c5", "#f02-c6", "#f02-c7"];
+      cards.forEach(function (c, i) {
+        var k = i + 1;
+        gsap.set(c, { x: 1600 + k * 80, z: -k * 100, rotationY: -72, opacity: 0 });
+      });
+      gsap.set("#f02-frente", { x: 1600, rotationY: -72, transformPerspective: 1500, opacity: 0 });
+      gsap.set("#f02-frente-in", { clipPath: "inset(0px round 18px)" });
+
+      /* título nasce pequeno atrás do zoom-through e assenta (assentamento longo) */
+      tl.to("#f02-titulo", { opacity: 1, duration: 2 * q, ease: "none" }, G(1.9667));
+      tl.to("#f02-titulo", { scale: 1, duration: 13 * q, ease: "expo.out" }, G(1.9667));
+
+      /* chips entram */
+      ["#f02-cb0", "#f02-cb1", "#f02-cb2"].forEach(function (c, i) {
+        tl.to(c, { y: 0, opacity: 1, duration: 7 * q, ease: "power3.out" }, G(2.45) + i * 2 * q);
+      });
+
+      /* roleta da seleção: desacelera e trava em "Mais recentes" no clique de 3,00 */
+      var roleta = [[2.58, 2], [2.64, 1], [2.71, 0], [2.79, 2], [2.88, 1], [3.00, 0]];
+      var ant = null;
+      roleta.forEach(function (r) {
+        var alvo = "#f02-s" + r[1];
+        if (ant) tl.set(ant, { opacity: 0 }, G(r[0]));
+        tl.set(alvo, { opacity: 1 }, G(r[0]));
+        ant = alvo;
+      });
+      /* empurrão lento na segura (antecipação do estouro) */
+      tl.to("#f02-grupo", { scale: 1.05, duration: 0.70, ease: "power1.in" }, G(2.42));
+      tl.to("#f02-cb0", { scale: .93, duration: 2 * q, ease: "power2.out" }, G(3.0));
+      tl.to("#f02-cb0", { scale: 1, duration: 5 * q, ease: "power2.out" }, G(3.0) + 2 * q);
+
+      /* baralho 3D entra pela direita (de trás para a frente) */
+      cards.slice().reverse().forEach(function (c, j) {
+        var k = cards.length - j;
+        tl.to(c, { x: -200 + k * 140, z: -k * 110, rotationY: -30, opacity: 1, duration: 14 * q,
+                   ease: "power3.out" }, G(3.03) + j * q);
+      });
+      tl.to("#f02-frente", { x: -200, rotationY: -30, opacity: 1, duration: 14 * q, ease: "power3.out" }, G(3.03) + 7 * q);
+
+      /* o título explode em eco enquanto o baralho passa (T3) */
+      tl.to("#f02-titulo", { scale: 1.45, filter: "blur(10px)", opacity: 0, duration: 5 * q, ease: "power3.in" }, G(3.12));
+      [["#f02-eco1", .45], ["#f02-eco2", .28], ["#f02-eco3", .14]].forEach(function (e, i) {
+        tl.set(e[0], { opacity: e[1] }, G(3.12) + (i + 1) * q);
+        tl.to(e[0], { scale: 1.45 - (i + 1) * .09, filter: "blur(10px)", opacity: 0, duration: 5 * q, ease: "power3.in" }, G(3.12) + (i + 1) * q);
+      });
+      tl.to("#f02-chips", { y: 60, opacity: 0, filter: "blur(8px)", duration: 5 * q, ease: "power3.in" }, G(3.12));
+
+      /* mergulho: o card da frente endireita e vira a tela cheia, pousando no drop (4,00) */
+      tl.to("#f02-frente", { x: 0, rotationY: 0, scale: 1920 / 840, duration: 13 * q, ease: "power3.inOut" }, G(3.5667));
+      tl.to("#f02-frente-in", { clipPath: "inset(0px round 0px)", duration: 13 * q, ease: "power3.inOut" }, G(3.5667));
+      tl.to("#f02-frente-dur", { opacity: 0, duration: 4 * q }, G(3.6));
+      tl.to(cards, { x: "-=260", opacity: 0, duration: 10 * q, ease: "power2.in" }, G(3.6667));
+
+      tl.to({}, { duration: D }, 0);
+      window.__timelines["f02-porque"] = tl;
+    })();
+  </script>
+</template>
+</body></html>

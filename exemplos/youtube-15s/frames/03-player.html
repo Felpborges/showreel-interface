@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>03 · o player: cortes na batida com o cromo do YouTube</title></head>
+<body>
+<template>
+  <link rel="stylesheet" href="assets/yt.css">
+  <style>
+    #root, #root * { box-sizing: border-box; }
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--fonte-ui); -webkit-font-smoothing: antialiased; background: #000; }
+    .f03-v { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+    .f03-grad-top { position: absolute; left: 0; top: 0; width: 1920px; height: 200px; background: linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,0)); }
+    .f03-grad-bot { position: absolute; left: 0; bottom: 0; width: 1920px; height: 260px; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.7)); }
+    .f03-titulo { position: absolute; left: 56px; top: 44px; width: 1500px; font: 400 40px/1.2 var(--fonte-ui); color: #fff;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+    .f03-trilho { position: absolute; left: 48px; top: 940px; width: 1824px; height: 8px; background: rgba(255,255,255,.3); }
+    .f03-buffer { position: absolute; left: 0; top: 0; height: 8px; background: rgba(255,255,255,.45); }
+    .f03-fill { position: absolute; left: 0; top: 0; height: 8px; background: var(--yt-progresso); }
+    .f03-scrub { position: absolute; top: -10px; width: 28px; height: 28px; margin-left: -14px; border-radius: 50%; background: var(--yt-red); }
+    .f03-ctrl { position: absolute; left: 48px; top: 976px; height: 72px; display: flex; align-items: center; gap: 34px; }
+    .f03-tempos { position: relative; width: 320px; height: 40px; }
+    .f03-tempo { position: absolute; left: 0; top: 3px; font: 400 34px/1 var(--fonte-ui); color: #fff; letter-spacing: .01em; white-space: nowrap; }
+    .f03-dir { position: absolute; right: 48px; top: 976px; height: 72px; display: flex; align-items: center; gap: 40px; }
+  </style>
+  <div id="root" data-composition-id="f03-player" data-width="1920" data-height="1080">
+    <!-- os vídeos do canal, cortados na grade (local 0 = 4,00 global) -->
+    <video id="f03-v1" class="f03-v" src="assets/clipes/c1-dicas-aponta.mp4"  data-start="0"    data-duration="0.5"  data-media-start="0.50" muted playsinline></video>
+    <video id="f03-v2" class="f03-v" src="assets/clipes/c2-opus-cartoes.mp4"  data-start="0.5"  data-duration="0.5"  data-media-start="0.30" muted playsinline></video>
+    <video id="f03-v3" class="f03-v" src="assets/clipes/c3-design-estudio.mp4" data-start="1"   data-duration="0.25" data-media-start="0.05" muted playsinline></video>
+    <video id="f03-v4" class="f03-v" src="assets/clipes/c4-skills-aponta.mp4" data-start="1.25" data-duration="0.25" data-media-start="0.40" muted playsinline></video>
+    <video id="f03-v5" class="f03-v" src="assets/clipes/c5-dicas-ok.mp4"      data-start="1.5"  data-duration="0.5"  data-media-start="0.55" muted playsinline></video>
+
+    <div class="f03-cromo" id="f03-cromo">
+      <div class="f03-grad-top"></div>
+      <div class="f03-grad-bot"></div>
+      <!-- título de cada vídeo (clipes temporizados junto com o vídeo) -->
+      <div class="f03-titulo f03-g" data-g="0">12 DICAS PARA DEIXAR O OPUS 5.5 MELHOR E MAIS BARATO</div>
+      <div class="f03-titulo f03-g" data-g="1">OPUS 5.5 ELEVOU os MOTION GRAPHICS para um nível INSANO</div>
+      <div class="f03-titulo f03-g" data-g="2">Claude Design Agora Faz Motion Graphics… e Ficou Absurdo</div>
+      <div class="f03-titulo f03-g" data-g="3">Domine Claude Code Skills em 1 Vídeo (Muito Fácil)</div>
+      <div class="f03-titulo f03-g" data-g="4">12 DICAS PARA DEIXAR O OPUS 5.5 MELHOR E MAIS BARATO</div>
+      <div class="f03-trilho">
+        <div class="f03-buffer f03-g" data-g="0"  style="width:9%"></div>
+        <div class="f03-buffer f03-g" data-g="1" style="width:8%"></div>
+        <div class="f03-buffer f03-g" data-g="2" style="width:6%"></div>
+        <div class="f03-buffer f03-g" data-g="3" style="width:7%"></div>
+        <div class="f03-buffer f03-g" data-g="4" style="width:9%"></div>
+        <!-- posição real de cada trecho: 0:18/17:14 · 0:15/16:18 · 0:00/20:36 · 0:07/23:58 · 0:14/17:14 -->
+        <div class="f03-fill f03-g" data-g="0" style="width:1.74%"></div>
+        <div class="f03-scrub f03-g" data-g="0" style="left:1.74%"></div>
+        <div class="f03-fill f03-g" data-g="1" style="width:1.53%"></div>
+        <div class="f03-scrub f03-g" data-g="1" style="left:1.53%"></div>
+        <div class="f03-fill f03-g" data-g="2" style="width:0.2%"></div>
+        <div class="f03-scrub f03-g" data-g="2" style="left:0.2%"></div>
+        <div class="f03-fill f03-g" data-g="3" style="width:0.5%"></div>
+        <div class="f03-scrub f03-g" data-g="3" style="left:0.5%"></div>
+        <div class="f03-fill f03-g" data-g="4" style="width:1.35%"></div>
+        <div class="f03-scrub f03-g" data-g="4" style="left:1.35%"></div>
+      </div>
+      <div class="f03-ctrl">
+        <!-- pausa (está tocando), próximo, volume -->
+        <svg width="56" height="56" viewBox="0 0 36 36"><path fill="#fff" d="M 12,26 16,26 16,10 12,10 z M 21,26 25,26 25,10 21,10 z"/></svg>
+        <svg width="56" height="56" viewBox="0 0 36 36"><path fill="#fff" d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"/></svg>
+        <svg width="56" height="56" viewBox="0 0 36 36"><path fill="#fff" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 Z"/></svg>
+        <div class="f03-tempos"><div class="f03-tempo f03-g" data-g="0">0:18 / 17:14</div>
+        <div class="f03-tempo f03-g" data-g="1">0:15 / 16:18</div>
+        <div class="f03-tempo f03-g" data-g="2">0:00 / 20:36</div>
+        <div class="f03-tempo f03-g" data-g="3">0:07 / 23:58</div>
+        <div class="f03-tempo f03-g" data-g="4">0:14 / 17:14</div></div>
+      </div>
+      <div class="f03-dir">
+        <!-- configurações e tela cheia -->
+        <svg width="56" height="56" viewBox="0 0 36 36"><path fill="#fff" d="m 23.94,18.78 c .03,-0.25 .05,-0.51 .05,-0.78 0,-0.27 -0.02,-0.52 -0.05,-0.78 l 1.68,-1.32 c .15,-0.12 .19,-0.33 .09,-0.51 l -1.6,-2.76 c -0.09,-0.17 -0.31,-0.24 -0.48,-0.17 l -1.99,.8 c -0.41,-0.32 -0.86,-0.58 -1.35,-0.78 l -0.30,-2.12 c -0.02,-0.19 -0.19,-0.33 -0.39,-0.33 l -3.2,0 c -0.2,0 -0.36,.14 -0.39,.33 l -0.30,2.12 c -0.48,.2 -0.93,.47 -1.35,.78 l -1.99,-0.8 c -0.18,-0.07 -0.39,0 -0.48,.17 l -1.6,2.76 c -0.10,.17 -0.05,.39 .09,.51 l 1.68,1.32 c -0.03,.25 -0.05,.52 -0.05,.78 0,.26 .02,.52 .05,.78 l -1.68,1.32 c -0.15,.12 -0.19,.33 -0.09,.51 l 1.6,2.76 c .09,.17 .31,.24 .48,.17 l 1.99,-0.8 c .41,.32 .86,.58 1.35,.78 l .30,2.12 c .02,.19 .19,.33 .39,.33 l 3.2,0 c .2,0 .36,-0.14 .39,-0.33 l .30,-2.12 c .48,-0.2 .93,-0.47 1.35,-0.78 l 1.99,.8 c .18,.07 .39,0 .48,-0.17 l 1.6,-2.76 c .09,-0.17 .05,-0.39 -0.09,-0.51 l -1.68,-1.32 0,0 z m -5.94,2.01 c -1.54,0 -2.8,-1.25 -2.8,-2.8 0,-1.54 1.25,-2.8 2.8,-2.8 1.54,0 2.8,1.25 2.8,2.8 0,1.54 -1.25,2.8 -2.8,2.8 l 0,0 z"/></svg>
+        <svg width="56" height="56" viewBox="0 0 36 36"><path fill="#fff" d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z"/><path fill="#fff" d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z"/><path fill="#fff" d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z"/><path fill="#fff" d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z"/></svg>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var FPS = 30, q = 1 / FPS, D = 2.0;   /* host: global 4,00 → 6,00 */
+      var tl = gsap.timeline({ paused: true });
+      /* o cromo some nos 4 últimos quadros: o f04 começa com o vídeo limpo em tela cheia (mesmo timecode) */
+      /* cada vídeo tem seu cromo (título, tempo, barra): troca seca no corte */
+      var cortes = [0, 0.5, 1.0, 1.25, 1.5];
+      var el = document.querySelectorAll("#f03-cromo .f03-g");
+      el.forEach(function (e) { gsap.set(e, { opacity: e.getAttribute("data-g") === "0" ? 1 : 0 }); });
+      cortes.forEach(function (t, g) {
+        if (g === 0) return;
+        el.forEach(function (e) {
+          var k = +e.getAttribute("data-g");
+          if (k === g - 1) tl.set(e, { opacity: 0 }, t);
+          if (k === g) tl.set(e, { opacity: 1 }, t);
+        });
+      });
+      tl.to("#f03-cromo", { opacity: 0, duration: 4 * q, ease: "power1.in" }, D - 4 * q);
+      tl.to({}, { duration: D }, 0);
+      window.__timelines["f03-player"] = tl;
+    })();
+  </script>
+</template>
+</body></html>

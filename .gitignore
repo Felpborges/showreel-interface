@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Quadros do vídeo de referência (SHOWREEL 2025, Misha Ruchko): obra de terceiros, com pessoas
+# reais e dados de contato. Ficam só na cópia local; a perícia publicada é o texto e os números.
+referencias/pericia/*.jpg

@@ -1,0 +1,289 @@
+[
+ {
+  "som": "clique",
+  "t": 0.5,
+  "ganho": -15,
+  "args": {
+   "freq": 2300
+  }
+ },
+ {
+  "som": "clique",
+  "t": 0.75,
+  "ganho": -15,
+  "args": {
+   "freq": 2600
+  }
+ },
+ {
+  "som": "clique",
+  "t": 1.0,
+  "ganho": -15,
+  "args": {
+   "freq": 2200
+  }
+ },
+ {
+  "som": "clique",
+  "t": 1.25,
+  "ganho": -14,
+  "args": {
+   "freq": 2500
+  }
+ },
+ {
+  "som": "clique",
+  "t": 1.375,
+  "ganho": -14,
+  "args": {
+   "freq": 2800
+  }
+ },
+ {
+  "som": "riser",
+  "t": 2.0,
+  "ganho": -13,
+  "args": {
+   "dur": 0.6
+  }
+ },
+ {
+  "som": "whoosh",
+  "t": 2.0,
+  "ganho": -6,
+  "args": {
+   "dur": 0.45
+  }
+ },
+ {
+  "som": "impacto",
+  "t": 2.0,
+  "ganho": -12
+ },
+ {
+  "som": "swish",
+  "t": 2.52,
+  "ganho": -17
+ },
+ {
+  "som": "tique",
+  "t": 2.58,
+  "ganho": -13
+ },
+ {
+  "som": "tique",
+  "t": 2.64,
+  "ganho": -13,
+  "args": {
+   "freq": 2600
+  }
+ },
+ {
+  "som": "tique",
+  "t": 2.71,
+  "ganho": -13
+ },
+ {
+  "som": "tique",
+  "t": 2.79,
+  "ganho": -13,
+  "args": {
+   "freq": 2600
+  }
+ },
+ {
+  "som": "tique",
+  "t": 2.88,
+  "ganho": -13
+ },
+ {
+  "som": "clique",
+  "t": 3.0,
+  "ganho": -8,
+  "args": {
+   "freq": 3300
+  }
+ },
+ {
+  "som": "whoosh",
+  "t": 3.22,
+  "ganho": -9,
+  "args": {
+   "dur": 0.5,
+   "f0": 180,
+   "f1": 4200,
+   "pan": [
+    0.7,
+    -0.4
+   ]
+  }
+ },
+ {
+  "som": "riser",
+  "t": 4.0,
+  "ganho": -11,
+  "args": {
+   "dur": 1.0
+  }
+ },
+ {
+  "som": "impacto",
+  "t": 4.0,
+  "ganho": -4
+ },
+ {
+  "som": "subdrop",
+  "t": 4.0,
+  "ganho": -9
+ },
+ {
+  "som": "swish",
+  "t": 6.22,
+  "ganho": -12
+ },
+ {
+  "som": "clique",
+  "t": 7.0,
+  "ganho": -8,
+  "args": {
+   "freq": 3200
+  }
+ },
+ {
+  "som": "cacaniquel",
+  "t": 7.53,
+  "ganho": -12,
+  "args": {
+   "dur": 0.45,
+   "n_tiques": 7
+  }
+ },
+ {
+  "som": "impacto",
+  "t": 8.0,
+  "ganho": -7
+ },
+ {
+  "som": "whoosh",
+  "t": 8.05,
+  "ganho": -12,
+  "args": {
+   "dur": 0.3,
+   "f0": 400,
+   "f1": 6000,
+   "pan": [
+    0,
+    0
+   ]
+  }
+ },
+ {
+  "som": "cacaniquel",
+  "t": 9.0,
+  "ganho": -15,
+  "args": {
+   "dur": 0.85,
+   "n_tiques": 12,
+   "desacel": 1.6
+  }
+ },
+ {
+  "som": "whoosh",
+  "t": 9.95,
+  "ganho": -6,
+  "args": {
+   "dur": 0.4,
+   "pan": [
+    0.6,
+    -0.8
+   ]
+  }
+ },
+ {
+  "som": "abafar",
+  "t": 10.0,
+  "ate": 11.95,
+  "freq": 520,
+  "ganho": -7
+ },
+ {
+  "som": "pop",
+  "t": 10.04,
+  "ganho": -20
+ },
+ {
+  "som": "pop",
+  "t": 10.1,
+  "ganho": -20,
+  "args": {
+   "f0": 820
+  }
+ },
+ {
+  "som": "pop",
+  "t": 10.17,
+  "ganho": -20
+ },
+ {
+  "som": "pop",
+  "t": 10.24,
+  "ganho": -20,
+  "args": {
+   "f0": 780
+  }
+ },
+ {
+  "som": "tique",
+  "t": 10.42,
+  "ganho": -19
+ },
+ {
+  "som": "tique",
+  "t": 10.62,
+  "ganho": -19,
+  "args": {
+   "freq": 2600
+  }
+ },
+ {
+  "som": "tique",
+  "t": 10.82,
+  "ganho": -19
+ },
+ {
+  "som": "reverso",
+  "t": 12.0,
+  "ganho": -10,
+  "args": {
+   "dur": 0.8
+  }
+ },
+ {
+  "som": "impacto",
+  "t": 12.0,
+  "ganho": -3
+ },
+ {
+  "som": "subdrop",
+  "t": 12.0,
+  "ganho": -8
+ },
+ {
+  "som": "swish",
+  "t": 12.85,
+  "ganho": -16
+ },
+ {
+  "som": "clique",
+  "t": 13.3,
+  "ganho": -7,
+  "args": {
+   "freq": 2900
+  }
+ },
+ {
+  "som": "ding",
+  "t": 13.4,
+  "ganho": -10
+ }
+]

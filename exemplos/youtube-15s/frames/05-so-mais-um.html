@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>05 · "só mais um vídeo…" — a pausa cômica</title></head>
+<body>
+<template>
+  <link rel="stylesheet" href="assets/yt.css">
+  <style>
+    #root, #root * { box-sizing: border-box; }
+    #root { position: absolute; inset: 0; overflow: hidden; -webkit-font-smoothing: antialiased; }
+    .f05-frase { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: flex; align-items: center;
+      justify-content: center; gap: 0; transform-origin: 960px 540px; font: 800 132px/1 var(--fonte-display);
+      letter-spacing: -.015em; color: var(--esc-txt); white-space: nowrap; }
+    .f05-w { display: inline-block; margin-right: .26em; }
+    .f05-dots { display: inline-block; width: 1.05em; text-align: left; }
+    .f05-dots span { opacity: 0; }
+    .f05-grupo { position: absolute; inset: 0; transform-origin: 960px 520px; }
+    .f05-frase { top: -70px; }
+    /* o card nativo "A seguir" (reprodução automática): a contagem enche durante a pausa */
+    .f05-next { position: absolute; left: 0; top: 640px; width: 1920px; display: flex; justify-content: center; align-items: center; gap: 30px; opacity: 0; }
+    .f05-next-lab { font: 500 30px/1.25 var(--fonte-ui); color: var(--esc-txt2); text-align: right; }
+    .f05-next-lab b { display: block; font: 500 34px/1.2 var(--fonte-ui); color: var(--esc-txt); }
+    .f05-next-th { position: relative; width: 320px; height: 180px; border-radius: 14px; overflow: hidden; }
+    .f05-next-th img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(.62); }
+    .f05-anel { position: absolute; left: 50%; top: 50%; width: 104px; height: 104px; margin: -52px 0 0 -52px; }
+  </style>
+  <div id="root" data-composition-id="f05-so-mais-um" data-width="1920" data-height="1080">
+    <div class="f05-grupo" id="f05-grupo">
+    <div class="f05-frase" id="f05-frase">
+      <span class="f05-w" id="f05-w1">só</span><span class="f05-w" id="f05-w2">mais</span><span class="f05-w" id="f05-w3">um</span><span class="f05-w" id="f05-w4" style="margin-right:0">vídeo<span class="f05-dots"><span id="f05-p1">.</span><span id="f05-p2">.</span><span id="f05-p3">.</span></span></span>
+    </div>
+    <div class="f05-next" id="f05-next">
+      <div class="f05-next-lab">A seguir<b>Domine Claude Code Skills</b></div>
+      <div class="f05-next-th"><img src="assets/thumbs/02-sLQPyJKSzoA.jpg" alt="">
+        <svg class="f05-anel" viewBox="0 0 104 104">
+          <circle cx="52" cy="52" r="46" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.28)" stroke-width="6"/>
+          <circle id="f05-arco" cx="52" cy="52" r="46" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"
+                  stroke-dasharray="289.03" stroke-dashoffset="289.03" transform="rotate(-90 52 52)"/>
+          <path d="M43 36 L70 52 L43 68 Z" fill="#FFFFFF"/>
+        </svg>
+      </div>
+    </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var FPS = 30, q = 1 / FPS, D = 2.0;   /* host: global 10,00 → 12,00 */
+      var tl = gsap.timeline({ paused: true });
+      var ws = ["#f05-w1", "#f05-w2", "#f05-w3", "#f05-w4"];
+      ws.forEach(function (w) { gsap.set(w, { x: 280, opacity: 0, filter: "blur(12px)" }); });
+
+      /* 1 quadro vazio, depois as palavras entram da direita em cascata (2 q) */
+      ws.forEach(function (w, i) {
+        tl.to(w, { x: 0, opacity: 1, filter: "blur(0px)", duration: 8 * q, ease: "expo.out" }, q + i * 2 * q);
+      });
+      /* as reticências "pensam" no tempo da piada */
+      tl.set("#f05-p1", { opacity: 1 }, 0.42);
+      tl.set("#f05-p2", { opacity: 1 }, 0.62);
+      tl.set("#f05-p3", { opacity: 1 }, 0.82);
+
+      /* segura encolhendo devagar (o vale) … */
+      tl.fromTo("#f05-next", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 8 * q, ease: "power3.out" }, 0.30);
+      tl.to("#f05-arco", { attr: { "stroke-dashoffset": 0 }, duration: 1.40, ease: "none" }, 0.40);
+      tl.to("#f05-grupo", { scale: .86, duration: 1.45, ease: "sine.inOut" }, 0.35);
+      /* … e encolhe rápido antes do soco (antecipação) */
+      tl.to("#f05-grupo", { scale: .3, opacity: 0, filter: "blur(6px)", duration: 5 * q, ease: "power4.in" }, D - 5 * q);
+
+      tl.to({}, { duration: D }, 0);
+      window.__timelines["f05-so-mais-um"] = tl;
+    })();
+  </script>
+</template>
+</body></html>

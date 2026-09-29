@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>01 · busca — "acesse Felipe Borges Fala IA!"</title></head>
+<body>
+<template>
+  <link rel="stylesheet" href="assets/yt.css">
+  <style>
+    #root, #root * { box-sizing: border-box; }
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--fonte-ui); -webkit-font-smoothing: antialiased; }
+    /* logo oficial (versão para fundo escuro), 110 px de altura: acima do mínimo de 100 px da marca,
+       respiro livre, sem efeito — só entra/sai por corte, fade, deslocamento e escala uniforme */
+    .f01-logo { position: absolute; left: 120px; top: 485px; height: 110px; transform-origin: 0 50%; }
+    /* palco da busca: é ele que o zoom-through atravessa */
+    .f01-cam { position: absolute; inset: 0; transform-origin: 1436px 552px; }
+    .f01-palco { position: absolute; inset: 0; transform-origin: 0 0; }
+    .f01-busca { left: 675px; top: 490px; }
+    .f01-campo { width: 860px; }
+    .f01-txt { position: relative; display: flex; align-items: center; height: 100px; }
+    .f01-txt .w { display: none; }
+    .f01-caret { display: inline-block; width: 3px; height: 58px; background: var(--esc-txt); margin-left: 4px; }
+    .f01-play { position: relative; display: none; }
+    .f01-trilho { position: absolute; left: 0; right: 0; bottom: -18px; height: 8px; background: rgba(255,255,255,.22); overflow: hidden; opacity: 0; }
+    .f01-fill { position: absolute; inset: 0; background: var(--yt-progresso); }
+    .f01-trilho-dot { position: absolute; left: 0; right: 0; bottom: -18px; height: 8px; opacity: 0; }
+    .f01-mover { position: absolute; inset: 0; }
+    .f01-dot { position: absolute; right: -14px; top: -10px; width: 28px; height: 28px; border-radius: 50%; background: var(--yt-red); }
+    .f01-placeholder { position: absolute; left: 48px; top: 0; height: 100px; display: flex; align-items: center; }
+  </style>
+  <div id="root" data-composition-id="f01-busca" data-width="1920" data-height="1080">
+    <img class="f01-logo" id="f01-logo" src="assets/marca/yt-logo-fullcolor-white.svg" alt="YouTube">
+    <div class="f01-cam" id="f01-cam"><div class="f01-palco" id="f01-palco" data-layout-allow-overflow>
+      <div class="yt-busca f01-busca">
+        <div class="yt-busca-campo f01-campo">
+          <div class="f01-placeholder yt-busca-txt yt-placeholder" id="f01-ph">Pesquisar</div>
+          <div class="f01-txt yt-busca-txt">
+            <span class="w" id="f01-w1">acesse&nbsp;</span><span class="w" id="f01-w2">Felipe&nbsp;</span><span class="w" id="f01-w3">Borges&nbsp;</span><span class="f01-play" id="f01-w4">Fala&nbsp;<span class="w" id="f01-w5">IA!</span><span class="f01-trilho" id="f01-trilho"><span class="f01-mover" id="f01-fill-m"><span class="f01-fill"></span></span></span><span class="f01-trilho-dot" id="f01-trilho-dot"><span class="f01-mover" id="f01-dot-m"><span class="f01-dot"></span></span></span></span><span class="f01-caret" id="f01-caret"></span>
+          </div>
+        </div>
+        <div class="yt-busca-botao">
+          <svg width="54" height="54" viewBox="0 0 24 24"><path fill="#F1F1F1" d="M16.296 16.996a8 8 0 11.707-.708l3.909 3.91-.707.707-3.909-3.909zM18 11a7 7 0 00-14 0 7 7 0 0014 0z"/></svg>
+        </div>
+        <div class="yt-mic">
+          <svg width="50" height="50" viewBox="0 0 24 24"><path fill="#F1F1F1" d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3zm0 1a2 2 0 012 2v6a2 2 0 01-4 0V6a2 2 0 012-2zm-6 7h1a5 5 0 0010 0h1a6 6 0 01-5.5 5.98V20h3v1H8.5v-1h3v-3.02A6 6 0 016 11z"/></svg>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <script>
+    (function () {
+      var FPS = 30, q = 1 / FPS, D = 2.1;
+      var tl = gsap.timeline({ paused: true });
+
+      /* repouso fora da timeline (regra: nunca tl.set na posição 0) */
+      gsap.set("#f01-fill-m", { xPercent: -100 });
+      gsap.set("#f01-dot-m", { xPercent: -100 });
+
+      /* estabelecimento (barra inteira, lupa e microfone) → push 2× para a digitação em close */
+      tl.to("#f01-palco", { x: -1135, y: -540, scale: 2, duration: 6 * q, ease: "power3.inOut" }, 0.30);
+      /* o logo sai junto com a câmera: deslocamento + escala uniforme + fade (nada de blur no logo) */
+      tl.to("#f01-logo", { x: -700, scale: 1.35, duration: 6 * q, ease: "power3.inOut" }, 0.30);
+      tl.to("#f01-logo", { opacity: 0, duration: 3 * q, ease: "power1.in" }, 0.30);
+
+      /* caret pisca antes de digitar */
+      tl.set("#f01-caret", { opacity: 0 }, 0.30);
+      tl.set("#f01-caret", { opacity: 1 }, 0.46);
+
+      /* digitação nas colcheias da intro: acesse (0,50) · Felipe (0,75) · Borges (1,00) · Fala (1,25) · IA! (1,375, semicolcheia) */
+      tl.set("#f01-ph", { display: "none" }, 0.50);
+      tl.set("#f01-w1", { display: "inline" }, 0.50);
+      tl.set("#f01-w2", { display: "inline" }, 0.75);
+      tl.set("#f01-w3", { display: "inline" }, 1.00);
+      tl.set("#f01-w4", { display: "inline-block" }, 1.25);
+      tl.set("#f01-w5", { display: "inline" }, 1.375);
+
+      /* a barra de progresso corre sob "Fala IA!" e o scrubber pousa no fim */
+      tl.set(["#f01-trilho", "#f01-trilho-dot"], { opacity: 1 }, 1.45);
+      tl.to(["#f01-fill-m", "#f01-dot-m"], { xPercent: 0, duration: 0.33, ease: "power1.inOut" }, 1.45);
+      tl.set("#f01-caret", { opacity: 0 }, 1.55);
+      tl.set("#f01-caret", { opacity: 1 }, 1.72);
+
+      /* T1 · zoom-through em 2,00: antecipação (5 q) → rajada (4 q) atravessando "Fala IA!" */
+      tl.to("#f01-cam", { scale: 1.1, duration: 5 * q, ease: "power2.in" }, 1.70);
+      tl.to("#f01-cam", { scale: 7.5, rotationX: 12, rotationZ: -2, transformPerspective: 1200,
+                          filter: "blur(14px)", duration: 4 * q, ease: "power4.in" }, 1.8667);
+      tl.to("#f01-cam", { opacity: 0, duration: 3 * q, ease: "none" }, 1.9333);
+
+      tl.to({}, { duration: D }, 0);
+      window.__timelines["f01-busca"] = tl;
+    })();
+  </script>
+</template>
+</body></html>
